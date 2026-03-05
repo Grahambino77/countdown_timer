@@ -65,17 +65,17 @@
     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur...</p>
     <h3>Breeds</h3>
     <ul>
-        <li>Big Ol Boy</li>
+        <li>Big Ol' Hokey Pokey</li>
         <ul>
             <li>He's going to eat a field of flies</li>
         </ul>
         <li>The Howlin' Hogger</li>
         <ul>
-            <li>Listen to the sound of hell</li>
+            <li>Listen to the sound of eternal torment</li>
         </ul>
-        <li>Croakin' Gnome Pigmes</li>
+        <li>Croakin' Gnome Belcher</li>
         <ul>
-            <li>These noisy bastards can be heard for miles</li>
+            <li>These noisy amphibians can be heard for miles</li>
         </ul>
     </ul>
 
@@ -390,6 +390,11 @@ footer .submit:hover {
         }
     }
 
+    function playAlarm() {
+        const frogSound = new Audio('Frog 3.mp3');
+        frogSound.play();
+    }
+
     function timerComplete() {
         clearInterval(timerInterval);
         isRunning = false;
@@ -398,6 +403,8 @@ footer .submit:hover {
         document.getElementById('timer-display').style.color = "#22d3ee";
         document.getElementById('timer-status').textContent = "Time's up!";
         document.getElementById('timer-status').style.color = "#22d3ee";
+
+        playAlarm();
 
         // Flash effect
         let flashCount = 0;
