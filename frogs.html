@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frogs Inc.</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional external stylesheet for more organization -->
+</head>
+
+<body>
+    <header id="header" class="header">
+        <div class="logo">
+            <img src="frog-icon-20.jpg" id="header-img" alt="Frog Logo">
+            <h1>Buy A Frog For Everyone You Know</h1>
+        </div>
+        <nav id="nav-bar">
+            <ul>
+                <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                <li><a class="nav-link" href="#shop">Shop</a></li>
+                <li><a class="nav-link" href="#frogstories">Frog Stories</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <!-- Countdown Timer Section -->
+    <section id="countdown-timer" style="background-color: #1a1a2e; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center;">
+        <h2 style="color: #e94560;">COUNTDOWN TIMER</h2>
+        <div id="timer-display" style="font-size: 48px; font-weight: bold; color: white; font-family: 'Courier New', monospace;">00:00:00</div>
+        <p id="timer-status" style="color: #a0a0a0;">Ready</p>
+        
+        <div style="margin: 20px 0;">
+            <label style="color: white;">Hours:</label>
+            <input type="number" id="hours-input" min="0" max="23" value="0" style="width: 50px; padding: 5px; text-align: center;">
+            <label style="color: white;">Minutes:</label>
+            <input type="number" id="minutes-input" min="0" max="59" value="0" style="width: 50px; padding: 5px; text-align: center;">
+            <label style="color: white;">Seconds:</label>
+            <input type="number" id="seconds-input" min="0" max="59" value="0" style="width: 50px; padding: 5px; text-align: center;">
+        </div>
+        
+        <div>
+            <button id="start-btn" onclick="startTimer()" style="background-color: #10b981; color: white; padding: 10px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px;">START</button>
+            <button id="pause-btn" onclick="pauseTimer()" style="background-color: #f59e0b; color: white; padding: 10px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px; display: none;">PAUSE</button>
+            <button id="reset-btn" onclick="resetTimer()" style="background-color: #4b5563; color: white; padding: 10px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px;">RESET</button>
+        </div>
+    </section>
+
+    <h2>The Frog (Screaming Amphibians)</h2>
+
+    <img src="Screaming Frog.jpg" id="screaming-frog" width="200px" alt="This frog is screaming into the void">
+    <div>
+        <a href="https://en.wikipedia.org/wiki/Toad">Don't Forget About <span>Toads!</span></a>
+        <a href="about.html">ABOUT PAGE</a>
+    </div>
+    <p>
+        <!-- Content here -->
+    </p>
+    <p>
+        <!-- More content here -->
+    </p>
+
+    <h2>All Frog Knowledge</h2>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur...</p>
+    <h3>Breeds</h3>
+    <ul>
+        <li>Big Ol Boy</li>
+        <ul>
+            <li>He's going to eat a field of flies</li>
+        </ul>
+        <li>The Howlin' Hogger</li>
+        <ul>
+            <li>Listen to the sound of hell</li>
+        </ul>
+        <li>Croakin' Gnome Pigmes</li>
+        <ul>
+            <li>These noisy bastards can be heard for miles</li>
+        </ul>
+    </ul>
+
+    <h3>Links</h3>
+    <section id="shop">Shop</section>
+    <section id="portfolio">Portfolio</section>
+    <section id="frogstories">
+        Frog Stories
+        <div id="frogstorylayover" style="width:100%; overflow: hidden">
+            <h2>The Legend of Beelzebufo</h2>
+            <iframe id="video" width="560" height="315" src="https://www.youtube-nocookie.com/embed/7AYN1CLbkm4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <h2>Beelzebufo</h2>
+            <h3>is extinct</h3>
+        </div>
+    </section>
+</body>
+
+<footer>
+    <form id="form" action="https://www.freecodecamp.com/email-submit">
+        <input id="text" type="text" name="text" placeholder="Enter Frog Questions Here" class="text" required>
+        <br>
+        <input id="email" type="email" name="email" placeholder="Enter Frog Email Here" class="email" required>
+        <br>
+        <input id="submit" type="submit" value="Ask Now" class="submit">
+    </form>
+</footer>
+
+<style>
+    /* General Body Styling */
+body {
+    background-color: forestgreen;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding-top: 100px; /* To avoid content being hidden under the fixed header */
+}
+
+/* Header Styling */
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #4CAF50; /* Change background to a frog-friendly green */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    opacity: 0.9;
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+}
+
+.header #header-img {
+    width: 40px; /* Icon size */
+    height: auto;
+    margin-right: 10px;
+}
+
+.header h1 {
+    color: white;
+    font-size: 24px;
+    margin: 0;
+}
+
+nav {
+    flex-grow: 1;
+    text-align: right;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav li {
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #3e8e41;
+    border-radius: 5px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        padding: 20px 10px;
+    }
+
+    .header .logo {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav li {
+        margin: 10px 0;
+    }
+}
+
+/* Content Styling */
+h2, h3 {
+    color: white;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+p, ul {
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    list-style-position: inside;
+}
+
+ul ul {
+    padding-left: 20px;
+}
+
+/* Center image, links div, and iframe */
+#screaming-frog {
+    display: block;
+    margin: 0 auto;
+}
+
+body > div, #frogstorylayover {
+    text-align: center;
+}
+
+#frogstorylayover iframe {
+    display: block;
+    margin: 0 auto;
+}
+
+section {
+    text-align: center;
+}
+
+/* Footer Styling */
+footer {
+    padding: 20px;
+    background-color: #4CAF50;
+    text-align: center;
+    color: white;
+    margin-top: 40px;
+}
+
+footer form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer input[type="text"], footer input[type="email"] {
+    padding: 10px;
+    margin: 10px 0;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+footer .submit {
+    background-color: #3e8e41;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+footer .submit:hover {
+    background-color: #2c6e2f;
+}
+
+</style>
+
+<script>
+    // Countdown Timer JavaScript
+    let isRunning = false;
+    let isPaused = false;
+    let remainingSeconds = 0;
+    let initialSeconds = 0;
+    let timerInterval = null;
+
+    function getTotalSeconds() {
+        const h = parseInt(document.getElementById('hours-input').value) || 0;
+        const m = parseInt(document.getElementById('minutes-input').value) || 0;
+        const s = parseInt(document.getElementById('seconds-input').value) || 0;
+        return h * 3600 + m * 60 + s;
+    }
+
+    function formatTime(totalSeconds) {
+        const h = Math.floor(totalSeconds / 3600);
+        const m = Math.floor((totalSeconds % 3600) / 60);
+        const s = totalSeconds % 60;
+        return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    function updateDisplay() {
+        document.getElementById('timer-display').textContent = formatTime(remainingSeconds);
+    }
+
+    function startTimer() {
+        if (isPaused) {
+            resumeTimer();
+            return;
+        }
+
+        const total = getTotalSeconds();
+        if (total <= 0) {
+            document.getElementById('timer-status').textContent = "Please enter a time!";
+            document.getElementById('timer-status').style.color = "#ef4444";
+            return;
+        }
+
+        initialSeconds = total;
+        remainingSeconds = total;
+        isRunning = true;
+        isPaused = false;
+
+        // Disable inputs
+        document.getElementById('hours-input').disabled = true;
+        document.getElementById('minutes-input').disabled = true;
+        document.getElementById('seconds-input').disabled = true;
+
+        // Switch buttons
+        document.getElementById('start-btn').style.display = 'none';
+        document.getElementById('pause-btn').style.display = 'inline-block';
+
+        document.getElementById('timer-status').textContent = "Running...";
+        document.getElementById('timer-status').style.color = "#10b981";
+
+        // Start countdown
+        timerInterval = setInterval(countdown, 1000);
+    }
+
+    function pauseTimer() {
+        if (isRunning && !isPaused) {
+            isPaused = true;
+            document.getElementById('pause-btn').textContent = "RESUME";
+            document.getElementById('timer-status').textContent = "Paused";
+            document.getElementById('timer-status').style.color = "#f59e0b";
+        } else if (isPaused) {
+            resumeTimer();
+        }
+    }
+
+    function resumeTimer() {
+        if (isPaused) {
+            isPaused = false;
+            document.getElementById('pause-btn').textContent = "PAUSE";
+            document.getElementById('timer-status').textContent = "Running...";
+            document.getElementById('timer-status').style.color = "#10b981";
+            timerInterval = setInterval(countdown, 1000);
+        }
+    }
+
+    function resetTimer() {
+        clearInterval(timerInterval);
+        
+        isRunning = false;
+        isPaused = false;
+
+        // Re-enable inputs
+        document.getElementById('hours-input').disabled = false;
+        document.getElementById('minutes-input').disabled = false;
+        document.getElementById('seconds-input').disabled = false;
+
+        // Reset buttons
+        document.getElementById('pause-btn').style.display = 'none';
+        document.getElementById('pause-btn').textContent = "PAUSE";
+        document.getElementById('start-btn').style.display = 'inline-block';
+
+        if (initialSeconds > 0) {
+            remainingSeconds = initialSeconds;
+            updateDisplay();
+        }
+
+        document.getElementById('timer-status').textContent = "Ready";
+        document.getElementById('timer-status').style.color = "#a0a0a0";
+        document.getElementById('timer-display').style.color = "white";
+    }
+
+    function countdown() {
+        if (!isPaused && remainingSeconds > 0) {
+            remainingSeconds--;
+            updateDisplay();
+            
+            if (remainingSeconds === 0) {
+                timerComplete();
+            }
+        }
+    }
+
+    function timerComplete() {
+        clearInterval(timerInterval);
+        isRunning = false;
+        remainingSeconds = 0;
+        updateDisplay();
+        document.getElementById('timer-display').style.color = "#22d3ee";
+        document.getElementById('timer-status').textContent = "Time's up!";
+        document.getElementById('timer-status').style.color = "#22d3ee";
+
+        // Flash effect
+        let flashCount = 0;
+        const flashInterval = setInterval(() => {
+            flashCount++;
+            if (flashCount >= 6) {
+                clearInterval(flashInterval);
+                document.getElementById('timer-display').style.color = "white";
+                // Re-enable inputs
+                document.getElementById('hours-input').disabled = false;
+                document.getElementById('minutes-input').disabled = false;
+                document.getElementById('seconds-input').disabled = false;
+                document.getElementById('pause-btn').style.display = 'none';
+                document.getElementById('start-btn').style.display = 'inline-block';
+            } else {
+                const color = flashCount % 2 === 0 ? "#22d3ee" : "white";
+                document.getElementById('timer-display').style.color = color;
+            }
+        }, 300);
+    }
+</script>
+
+</html>
