@@ -67,7 +67,58 @@
 - Disable input fields while timer is running
 - Handle window close during countdown gracefully
 
-## 4. Acceptance Criteria
+## 4. Web Integration — frogs.html
+
+The countdown timer has been integrated directly into the `Frogs/frogs.html` page as an embedded HTML/CSS/JavaScript section. Here's how it maps to the desktop specification:
+
+### How It's Embedded
+The timer is placed inside a `<section id="countdown-timer">` block in the `<body>` of `frogs.html`, positioned just below the navigation header and above the main frog content.
+
+### HTML Structure
+```html
+<section id="countdown-timer" style="background-color: #1a1a2e; ...">
+    <h2>COUNTDOWN TIMER</h2>
+    <div id="timer-display">00:00:00</div>
+    <p id="timer-status">Ready</p>
+    <div> <!-- Hour, Minute, Second inputs --> </div>
+    <div> <!-- Start, Pause, Reset buttons --> </div>
+</section>
+```
+
+### Visual Design (matches spec)
+- **Background:** `#1a1a2e` (dark navy) — same as the desktop app
+- **Title accent color:** `#e94560` (coral red) — same as the desktop app
+- **Timer font:** Monospace, 48px, bold white text
+- **Status text:** `#a0a0a0` gray for idle, `#10b981` green for running, `#f59e0b` amber for paused, `#22d3ee` cyan for complete
+
+### JavaScript Logic (inline `<script>` tag)
+All timer logic is written in vanilla JavaScript at the bottom of `frogs.html`:
+
+| Function | Description |
+|---|---|
+| `startTimer()` | Reads H/M/S inputs, validates non-zero, starts `setInterval` countdown |
+| `pauseTimer()` | Stops the interval, updates button text to "RESUME" |
+| `resumeTimer()` | Restarts the interval from the remaining seconds |
+| `resetTimer()` | Clears the interval, re-enables inputs, restores original time |
+| `countdown()` | Decrements `remainingSeconds` each second, calls `timerComplete()` at zero |
+| `timerComplete()` | Clears interval, triggers a cyan flash effect on the display |
+
+### State Variables
+- `isRunning` — Whether the timer is actively counting
+- `isPaused` — Whether the timer has been paused mid-count
+- `remainingSeconds` — Current seconds left on the clock
+- `initialSeconds` — The original starting duration (used by Reset)
+- `timerInterval` — The `setInterval` handle used to start/stop the tick
+
+### Key Behaviors
+- Input fields are **disabled** while the timer is running (re-enabled on reset/complete)
+- The **Pause button** is hidden by default and only shown once the timer starts
+- On completion, the timer display **flashes cyan 3 times** before resetting to a static state
+- Entering **all zeros** is blocked with an error message in the status label
+
+---
+
+## 5. Acceptance Criteria
 
 ### Visual Checkpoints
 - [ ] Dark theme with coral/teal accents displays correctly
