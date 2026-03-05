@@ -6,6 +6,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frogs Inc.</title>
     <link rel="stylesheet" href="styles.css"> <!-- Optional external stylesheet for more organization -->
+    <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<style>
+  #frogMap {
+    width: 100%;
+    height: 500px;
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 8px 32px rgba(0, 80, 0, 0.45), 0 2px 8px rgba(0,0,0,0.3);
+    border: 3px solid #2e7d32;
+  }
+
+  /* ── Lily-Pad Map Section ── */
+  #frog-map-section {
+    margin: 40px auto;
+    max-width: 900px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #134e1e 0%, #1b6b2a 30%, #27ae60 60%, #145a32 100%);
+    box-shadow:
+      0 0 0 5px #2e7d32,
+      0 0 0 10px #1a4a1f,
+      0 16px 48px rgba(0, 60, 0, 0.6);
+    position: relative;
+  }
+
+  /* Lily-pad border rows */
+  .lily-pad-border {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 12px;
+    background: linear-gradient(90deg, #0d3b18, #1a6b30, #0d3b18);
+    border-bottom: 2px solid rgba(255,255,255,0.08);
+    flex-wrap: nowrap;
+    gap: 4px;
+  }
+
+  .lily-pad-border.bottom-border {
+    border-top: 2px solid rgba(255,255,255,0.08);
+    border-bottom: none;
+    background: linear-gradient(90deg, #0d3b18, #1a6b30, #0d3b18);
+  }
+
+  .lily-pad {
+    font-size: 28px;
+    display: inline-block;
+    animation: float-pad 3s ease-in-out infinite;
+    filter: drop-shadow(0 2px 6px rgba(0,100,0,0.6));
+  }
+
+  .lily-pad:nth-child(even) {
+    animation-delay: 0.5s;
+    animation-duration: 3.5s;
+  }
+
+  .lily-pad:nth-child(3n) {
+    animation-delay: 1s;
+    animation-duration: 4s;
+  }
+
+  @keyframes float-pad {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50%       { transform: translateY(-6px) rotate(3deg); }
+  }
+
+  /* Inner content wrapper */
+  .map-section-inner {
+    padding: 24px 32px 16px;
+    background: linear-gradient(180deg,
+      rgba(0,0,0,0.1) 0%,
+      rgba(20, 90, 40, 0.15) 50%,
+      rgba(0,0,0,0.15) 100%);
+  }
+
+  .map-section-title {
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 12px rgba(0,200,80,0.5), 0 0 4px #000;
+    background: linear-gradient(90deg, #a8ff78, #78ffd6, #a8ff78);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 4px !important;
+  }
+
+  .map-section-subtitle {
+    font-size: 1rem;
+    color: #b2f5c8 !important;
+    letter-spacing: 1px;
+    margin-bottom: 0 !important;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  .map-section-caption {
+    font-size: 0.85rem;
+    color: #81c995 !important;
+    font-style: italic;
+    margin-top: 12px !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+</style>
 </head>
 
 <body>
@@ -87,9 +195,47 @@
         <div id="frogstorylayover" style="width:100%; overflow: hidden">
             <h2>The Legend of Beelzebufo</h2>
             <iframe id="video" width="560" height="315" src="https://www.youtube-nocookie.com/embed/7AYN1CLbkm4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <h2>Beelzebufo</h2>
-            <h3>is extinct</h3>
+            <h2>Beelzebufo may be extinct...</h2>
+            <h3>but you can honor the legend at these historical frog monuments</h3>
         </div>
+    </section>
+
+    <!-- Lily-Pad Map Section -->
+    <section id="frog-map-section">
+      <div class="lily-pad-border top-border">
+        <span class="lily-pad">🍃</span>
+        <span class="lily-pad">🪷</span>
+        <span class="lily-pad">🍃</span>
+        <span class="lily-pad">🪷</span>
+        <span class="lily-pad">🍃</span>
+        <span class="lily-pad">🪷</span>
+        <span class="lily-pad">🍃</span>
+        <span class="lily-pad">🪷</span>
+        <span class="lily-pad">🍃</span>
+        <span class="lily-pad">🪷</span>
+        <span class="lily-pad">🍃</span>
+      </div>
+
+      <div class="map-section-inner">
+        <h2 class="map-section-title">🐸 Frog Monument Map 🐸</h2>
+        <p class="map-section-subtitle">Explore legendary frog landmarks across the country</p>
+        <div id="frogMap"></div>
+        <p class="map-section-caption">Click a marker to learn about each frog‑famous location!</p>
+      </div>
+
+      <div class="lily-pad-border bottom-border">
+        <span class="lily-pad">🪷</span>
+        <span class="lily-pad">🍃</span>
+        <span class="lily-pad">🪷</span>
+        <span class="lily-pad">🍃</span>
+        <span class="lily-pad">🪷</span>
+        <span class="lily-pad">🍃</span>
+        <span class="lily-pad">🪷</span>
+        <span class="lily-pad">🍃</span>
+        <span class="lily-pad">🪷</span>
+        <span class="lily-pad">🍃</span>
+        <span class="lily-pad">🪷</span>
+      </div>
     </section>
 </body>
 
@@ -425,6 +571,57 @@ footer .submit:hover {
             }
         }, 300);
     }
+</script>
+
+<script>
+// Center map roughly on the U.S. (adjust if you want)
+const map = L.map('frogMap').setView([39.5, -98.35], 4);
+
+// Tile layer (OpenStreetMap)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// Custom frog icon – using a reliable hosted cartoon frog PNG via Twemoji
+const frogIcon = L.divIcon({
+  html: '<div style="font-size:36px;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5));">🐸</div>',
+  iconSize: [40, 40],
+  iconAnchor: [20, 36],
+  popupAnchor: [0, -38],
+  className: ''
+});
+
+// Frog‑themed locations
+const frogPlaces = [
+  {
+    name: "Frog Fountain – TCU",
+    desc: "A famous frog landmark at Texas Christian University.",
+    coords: [32.7093, -97.3615]
+  },
+  {
+    name: "Frog Pond – Boston Common",
+    desc: "A historic pond and skating area with frog sculptures.",
+    coords: [42.3550, -71.0656]
+  },
+  {
+    name: "Frog Rock – CT",
+    desc: "A quirky roadside attraction shaped like a giant frog.",
+    coords: [41.8400, -72.3000]
+  },
+  {
+    name: "Frog Bay Tribal National Park – WI",
+    desc: "The first tribal national park in the U.S., named for its frog‑rich wetlands.",
+    coords: [46.7833, -90.7833]
+  }
+];
+
+// Add markers
+frogPlaces.forEach(place => {
+  L.marker(place.coords, { icon: frogIcon })
+    .addTo(map)
+    .bindPopup(`<b>${place.name}</b><br>${place.desc}`);
+});
 </script>
 
 </html>
