@@ -6,114 +6,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frogs Inc.</title>
     <link rel="stylesheet" href="styles.css"> <!-- Optional external stylesheet for more organization -->
-    <link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
-<script
-  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
-</script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
 
-<style>
-  #frogMap {
-    width: 100%;
-    height: 500px;
-    border-radius: 12px;
-    margin-top: 20px;
-    box-shadow: 0 8px 32px rgba(0, 80, 0, 0.45), 0 2px 8px rgba(0,0,0,0.3);
-    border: 3px solid #2e7d32;
-  }
+    <style>
+        #frogMap {
+            width: 100%;
+            height: 500px;
+            border-radius: 12px;
+            margin-top: 20px;
+            box-shadow: 0 8px 32px rgba(0, 80, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
+            border: 3px solid #2e7d32;
+        }
 
-  /* ── Lily-Pad Map Section ── */
-  #frog-map-section {
-    margin: 40px auto;
-    max-width: 900px;
-    border-radius: 24px;
-    overflow: hidden;
-    background: linear-gradient(160deg, #134e1e 0%, #1b6b2a 30%, #27ae60 60%, #145a32 100%);
-    box-shadow:
-      0 0 0 5px #2e7d32,
-      0 0 0 10px #1a4a1f,
-      0 16px 48px rgba(0, 60, 0, 0.6);
-    position: relative;
-  }
+        /* ── Lily-Pad Map Section ── */
+        #frog-map-section {
+            margin: 40px auto;
+            max-width: 900px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: linear-gradient(160deg, #134e1e 0%, #1b6b2a 30%, #27ae60 60%, #145a32 100%);
+            box-shadow:
+                0 0 0 5px #2e7d32,
+                0 0 0 10px #1a4a1f,
+                0 16px 48px rgba(0, 60, 0, 0.6);
+            position: relative;
+        }
 
-  /* Lily-pad border rows */
-  .lily-pad-border {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 8px 12px;
-    background: linear-gradient(90deg, #0d3b18, #1a6b30, #0d3b18);
-    border-bottom: 2px solid rgba(255,255,255,0.08);
-    flex-wrap: nowrap;
-    gap: 4px;
-  }
+        /* Lily-pad border rows */
+        .lily-pad-border {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 12px;
+            background: linear-gradient(90deg, #0d3b18, #1a6b30, #0d3b18);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+            flex-wrap: nowrap;
+            gap: 4px;
+        }
 
-  .lily-pad-border.bottom-border {
-    border-top: 2px solid rgba(255,255,255,0.08);
-    border-bottom: none;
-    background: linear-gradient(90deg, #0d3b18, #1a6b30, #0d3b18);
-  }
+        .lily-pad-border.bottom-border {
+            border-top: 2px solid rgba(255, 255, 255, 0.08);
+            border-bottom: none;
+            background: linear-gradient(90deg, #0d3b18, #1a6b30, #0d3b18);
+        }
 
-  .lily-pad {
-    font-size: 28px;
-    display: inline-block;
-    animation: float-pad 3s ease-in-out infinite;
-    filter: drop-shadow(0 2px 6px rgba(0,100,0,0.6));
-  }
+        .lily-pad {
+            font-size: 28px;
+            display: inline-block;
+            animation: float-pad 3s ease-in-out infinite;
+            filter: drop-shadow(0 2px 6px rgba(0, 100, 0, 0.6));
+        }
 
-  .lily-pad:nth-child(even) {
-    animation-delay: 0.5s;
-    animation-duration: 3.5s;
-  }
+        .lily-pad:nth-child(even) {
+            animation-delay: 0.5s;
+            animation-duration: 3.5s;
+        }
 
-  .lily-pad:nth-child(3n) {
-    animation-delay: 1s;
-    animation-duration: 4s;
-  }
+        .lily-pad:nth-child(3n) {
+            animation-delay: 1s;
+            animation-duration: 4s;
+        }
 
-  @keyframes float-pad {
-    0%, 100% { transform: translateY(0) rotate(-3deg); }
-    50%       { transform: translateY(-6px) rotate(3deg); }
-  }
+        @keyframes float-pad {
 
-  /* Inner content wrapper */
-  .map-section-inner {
-    padding: 24px 32px 16px;
-    background: linear-gradient(180deg,
-      rgba(0,0,0,0.1) 0%,
-      rgba(20, 90, 40, 0.15) 50%,
-      rgba(0,0,0,0.15) 100%);
-  }
+            0%,
+            100% {
+                transform: translateY(0) rotate(-3deg);
+            }
 
-  .map-section-title {
-    font-size: 2rem;
-    letter-spacing: 2px;
-    text-shadow: 0 2px 12px rgba(0,200,80,0.5), 0 0 4px #000;
-    background: linear-gradient(90deg, #a8ff78, #78ffd6, #a8ff78);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 4px !important;
-  }
+            50% {
+                transform: translateY(-6px) rotate(3deg);
+            }
+        }
 
-  .map-section-subtitle {
-    font-size: 1rem;
-    color: #b2f5c8 !important;
-    letter-spacing: 1px;
-    margin-bottom: 0 !important;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-  }
+        /* Inner content wrapper */
+        .map-section-inner {
+            padding: 24px 32px 16px;
+            background: linear-gradient(180deg,
+                    rgba(0, 0, 0, 0.1) 0%,
+                    rgba(20, 90, 40, 0.15) 50%,
+                    rgba(0, 0, 0, 0.15) 100%);
+        }
 
-  .map-section-caption {
-    font-size: 0.85rem;
-    color: #81c995 !important;
-    font-style: italic;
-    margin-top: 12px !important;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-  }
-</style>
+        .map-section-title {
+            font-size: 2rem;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 12px rgba(11, 11, 11, 0.5), 0 0 4px #000;
+            background: linear-gradient(90deg, #a8ff78, #78ffd6, #a8ff78);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px !important;
+        }
+
+        .map-section-subtitle {
+            font-size: 1rem;
+            color: #b2f5c8 !important;
+            letter-spacing: 1px;
+            margin-bottom: 0 !important;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .map-section-caption {
+            font-size: 0.85rem;
+            color: #81c995 !important;
+            font-style: italic;
+            margin-top: 12px !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        }
+    </style>
 </head>
 
 <body>
@@ -134,24 +137,33 @@
     <hr>
 
     <!-- Countdown Timer Section -->
-    <section id="countdown-timer" style="background-color: #1a1a2e; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center;">
-        <h2 style="color: #e94560;">COUNTDOWN TIMER</h2>
-        <div id="timer-display" style="font-size: 48px; font-weight: bold; color: white; font-family: 'Courier New', monospace;">00:00:00</div>
+    <section id="countdown-timer"
+        style="background-color: #1a1a2e; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center;">
+        <h2 style="color: #e94560;">COUNTDOWN TO FROG TOWN</h2>
+        <div id="timer-display"
+            style="font-size: 48px; font-weight: bold; color: white; font-family: 'Courier New', monospace;">00:00:00
+        </div>
         <p id="timer-status" style="color: #a0a0a0;">Ready</p>
-        
+
         <div style="margin: 20px 0;">
             <label style="color: white;">Hours:</label>
-            <input type="number" id="hours-input" min="0" max="23" value="0" style="width: 50px; padding: 5px; text-align: center;">
+            <input type="number" id="hours-input" min="0" max="23" value="0"
+                style="width: 50px; padding: 5px; text-align: center;">
             <label style="color: white;">Minutes:</label>
-            <input type="number" id="minutes-input" min="0" max="59" value="0" style="width: 50px; padding: 5px; text-align: center;">
+            <input type="number" id="minutes-input" min="0" max="59" value="0"
+                style="width: 50px; padding: 5px; text-align: center;">
             <label style="color: white;">Seconds:</label>
-            <input type="number" id="seconds-input" min="0" max="59" value="0" style="width: 50px; padding: 5px; text-align: center;">
+            <input type="number" id="seconds-input" min="0" max="59" value="0"
+                style="width: 50px; padding: 5px; text-align: center;">
         </div>
-        
+
         <div>
-            <button id="start-btn" onclick="startTimer()" style="background-color: #10b981; color: white; padding: 10px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px;">START</button>
-            <button id="pause-btn" onclick="pauseTimer()" style="background-color: #f59e0b; color: white; padding: 10px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px; display: none;">PAUSE</button>
-            <button id="reset-btn" onclick="resetTimer()" style="background-color: #4b5563; color: white; padding: 10px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px;">RESET</button>
+            <button id="start-btn" onclick="startTimer()"
+                style="background-color: #10b981; color: white; padding: 10px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px;">START</button>
+            <button id="pause-btn" onclick="pauseTimer()"
+                style="background-color: #f59e0b; color: white; padding: 10px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px; display: none;">PAUSE</button>
+            <button id="reset-btn" onclick="resetTimer()"
+                style="background-color: #4b5563; color: white; padding: 10px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px;">RESET</button>
         </div>
     </section>
 
@@ -172,20 +184,151 @@
     <h2>All Frog Knowledge</h2>
     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur...</p>
     <h3>Breeds</h3>
-    <ul>
-        <li>Big Ol' Hokey Pokey</li>
-        <ul>
-            <li>He's going to eat a field of flies</li>
-        </ul>
-        <li>The Howlin' Hogger</li>
-        <ul>
-            <li>Listen to the sound of eternal torment</li>
-        </ul>
-        <li>Croakin' Gnome Belcher</li>
-        <ul>
-            <li>These noisy amphibians can be heard for miles</li>
-        </ul>
-    </ul>
+
+    <!-- ══════════ ALIEN FROG SLIDESHOW ══════════ -->
+    <div id="alien-frog-slideshow">
+
+        <div class="afs-slide active">
+            <div class="afs-img-wrap">
+                <img src="AI_Frog_BigOlHokeyPokey.png" alt="Big Ol' Hokey Pokey" class="afs-fake-img">
+                <div class="afs-alien-overlay">
+                    <!--Eyes and antenna emjois removed -->
+                </div>
+                <div class="afs-scanline"></div>
+            </div>
+            <div class="afs-caption">
+                <h4 class="afs-name">Big Ol' Hokey Pokey</h4>
+                <p class="afs-species">Species: <em>Gargantua hokeii</em> &nbsp;|&nbsp; Origin: Swamp Nebula, Sector 7
+                </p>
+                <p class="afs-desc">He's going to eat a field of flies — and then your entire
+                    solar system. His belly glows like a second moon and vibrates at a
+                    frequency that makes car alarms go off on three planets.</p>
+                <span class="afs-badge">⚠️ Threat Level: Delightfully Dangerous</span>
+            </div>
+        </div>
+
+        <div class="afs-slide">
+            <div class="afs-img-wrap">
+                <img src="AI_Frog_HowlinHogger.png"
+                    alt="The Howlin' Hogger" class="afs-fake-img">
+                <div class="afs-alien-overlay">
+                    <!-- Eyes and antenna emjois removed -->
+                </div>
+                <div class="afs-scanline"></div>
+            </div>
+            <div class="afs-caption">
+                <h4 class="afs-name">The Howlin' Hogger</h4>
+                <p class="afs-species">Species: <em>Ululatus maximus</em> &nbsp;|&nbsp; Origin: The Screaming Moons of
+                    Zorbax</p>
+                <p class="afs-desc">Listen to the sound of eternal torment — now imagine that
+                    sound wearing a tiny cowboy hat. His croak has been classified as a
+                    war crime by four intergalactic councils, yet his singing career is
+                    absolutely thriving.</p>
+                <span class="afs-badge">🤠 Threat Level: Sonically Catastrophic</span>
+            </div>
+        </div>
+
+        <div class="afs-slide">
+            <div class="afs-img-wrap">
+                <img src="AI_Frog_CroakinGnomeFleaToad.png"
+                    alt="Croakin' Gnome Flea Toad" class="afs-fake-img">
+                <div class="afs-alien-overlay">
+                   <!-- Eyes and antenna emojis removed -->
+                </div>
+                <div class="afs-scanline"></div>
+            </div>
+            <div class="afs-caption">
+                <h4 class="afs-name">Croakin' Gnome Flea Toad</h4>
+                <p class="afs-species">Species: <em>Nanus eructor</em> &nbsp;|&nbsp; Origin: Fungal Forests of Planet
+                    Mork</p>
+                <p class="afs-desc">These noisy amphibians can be heard for miles — specifically
+                    42.7 miles, as measured by NASA. Scientists believe their belches contain
+                    encoded messages. So far the messages just say "feed me" in 14 languages.</p>
+                <span class="afs-badge">📢 Threat Level: Aggressively Pungent</span>
+            </div>
+        </div>
+
+        <div class="afs-slide">
+            <div class="afs-img-wrap">
+                <img src="https://placehold.co/560x340/1a1400/ffe066?font=montserrat&text=%F0%9F%91%BD%F0%9F%90%B8"
+                    alt="Glorp the Magnificent" class="afs-fake-img">
+                <div class="afs-alien-overlay">
+                    <span class="afs-eye left-eye">✨</span>
+                    <span class="afs-eye right-eye">✨</span>
+                    <span class="afs-antenna">👑</span>
+                </div>
+                <div class="afs-scanline"></div>
+            </div>
+            <div class="afs-caption">
+                <h4 class="afs-name">Glorp the Magnificent</h4>
+                <p class="afs-species">Species: <em>Glorpius imperialis</em> &nbsp;|&nbsp; Origin: Golden Bog of Aurum-9
+                </p>
+                <p class="afs-desc">Arrived on Earth in 1987 inside a meteorite wearing a
+                    tiny velvet cape. Glorp has since trademarked the color yellow and
+                    charges licensing fees to every daffodil on the planet. His net worth
+                    is estimated at 47 billion bog bucks.</p>
+                <span class="afs-badge">💰 Threat Level: Financially Ruinous</span>
+            </div>
+        </div>
+
+        <div class="afs-slide">
+            <div class="afs-img-wrap">
+                <img src="https://placehold.co/560x340/2b0000/ff9a9a?font=montserrat&text=%F0%9F%91%BD%F0%9F%90%B8"
+                    alt="Squibble McVomit" class="afs-fake-img">
+                <div class="afs-alien-overlay">
+                    <span class="afs-eye left-eye">💀</span>
+                    <span class="afs-eye right-eye">💀</span>
+                    <span class="afs-antenna">☄️</span>
+                </div>
+                <div class="afs-scanline"></div>
+            </div>
+            <div class="afs-caption">
+                <h4 class="afs-name">Squibble McVomit</h4>
+                <p class="afs-species">Species: <em>Ejectus spectacularis</em> &nbsp;|&nbsp; Origin: The Cursed Puddles
+                    of Urp-6</p>
+                <p class="afs-desc">Don't let the name fool you — Squibble is a distinguished
+                    academic with three PhDs. Unfortunately all three are in Competitive
+                    Regurgitation. He holds the intergalactic record and is weirdly proud
+                    of it at every dinner party.</p>
+                <span class="afs-badge">🎓 Threat Level: Academically Revolting</span>
+            </div>
+        </div>
+
+        <div class="afs-slide">
+            <div class="afs-img-wrap">
+                <img src="https://placehold.co/560x340/00142b/78c8ff?font=montserrat&text=%F0%9F%91%BD%F0%9F%90%B8"
+                    alt="Professor Blorb Zeetangle III" class="afs-fake-img">
+                <div class="afs-alien-overlay">
+                    <span class="afs-eye left-eye">🔭</span>
+                    <span class="afs-eye right-eye">🔭</span>
+                    <span class="afs-antenna">🎓</span>
+                </div>
+                <div class="afs-scanline"></div>
+            </div>
+            <div class="afs-caption">
+                <h4 class="afs-name">Professor Blorb Zeetangle III</h4>
+                <p class="afs-species">Species: <em>Intellectus blobicus</em> &nbsp;|&nbsp; Origin: The Library Swamps
+                    of Cognito Prime</p>
+                <p class="afs-desc">The universe's foremost expert on absolutely nothing useful.
+                    His 4,000-page thesis "On the Philosophical Implications of Sitting on
+                    a Wet Rock" won the Zorbellian Prize for Literature and also caused
+                    three peer reviewers to quit academia forever.</p>
+                <span class="afs-badge">📚 Threat Level: Insufferably Intellectual</span>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="afs-controls">
+            <button class="afs-btn afs-prev" onclick="afsMove(-1)" aria-label="Previous">&#10094;</button>
+            <div class="afs-dots" id="afs-dots"></div>
+            <button class="afs-btn afs-next" onclick="afsMove(1)" aria-label="Next">&#10095;</button>
+        </div>
+
+        <div class="afs-progress-bar">
+            <div class="afs-progress-fill" id="afs-progress"></div>
+        </div>
+    </div>
+    <!-- ══════════ END ALIEN FROG SLIDESHOW ══════════ -->
 
     <h3>Links</h3>
     <section id="shop">Shop</section>
@@ -194,7 +337,10 @@
         Frog Stories
         <div id="frogstorylayover" style="width:100%; overflow: hidden">
             <h2>WATCH AND LISTEN to David Attenborough unveil the awe‑inspiring saga of the legendary Beelzebufo</h2>
-            <iframe id="video" width="560" height="315" src="https://www.youtube-nocookie.com/embed/7AYN1CLbkm4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe id="video" width="560" height="315" src="https://www.youtube-nocookie.com/embed/7AYN1CLbkm4"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
             <h2>Beelzebufo may be extinct...</h2>
             <h3>but you can honor the legend at these historical frog monuments</h3>
         </div>
@@ -202,40 +348,40 @@
 
     <!-- Lily-Pad Map Section -->
     <section id="frog-map-section">
-      <div class="lily-pad-border top-border">
-        <span class="lily-pad">🍃</span>
-        <span class="lily-pad">🪷</span>
-        <span class="lily-pad">🍃</span>
-        <span class="lily-pad">🪷</span>
-        <span class="lily-pad">🍃</span>
-        <span class="lily-pad">🪷</span>
-        <span class="lily-pad">🍃</span>
-        <span class="lily-pad">🪷</span>
-        <span class="lily-pad">🍃</span>
-        <span class="lily-pad">🪷</span>
-        <span class="lily-pad">🍃</span>
-      </div>
+        <div class="lily-pad-border top-border">
+            <span class="lily-pad">🍃</span>
+            <span class="lily-pad">🪷</span>
+            <span class="lily-pad">🍃</span>
+            <span class="lily-pad">🪷</span>
+            <span class="lily-pad">🍃</span>
+            <span class="lily-pad">🪷</span>
+            <span class="lily-pad">🍃</span>
+            <span class="lily-pad">🪷</span>
+            <span class="lily-pad">🍃</span>
+            <span class="lily-pad">🪷</span>
+            <span class="lily-pad">🍃</span>
+        </div>
 
-      <div class="map-section-inner">
-        <h2 class="map-section-title">🐸 Frog Monument Map 🐸</h2>
-        <p class="map-section-subtitle">Explore legendary frog landmarks across the country</p>
-        <div id="frogMap"></div>
-        <p class="map-section-caption">Click a marker to learn about each frog‑famous location!</p>
-      </div>
+        <div class="map-section-inner">
+            <h2 class="map-section-title"> Frog Monument Map </h2>
+            <p class="map-section-subtitle">Explore legendary frog landmarks across the country</p>
+            <div id="frogMap"></div>
+            <p class="map-section-caption">Click a marker to learn about each frog‑famous location!</p>
+        </div>
 
-      <div class="lily-pad-border bottom-border">
-        <span class="lily-pad">🪷</span>
-        <span class="lily-pad">🍃</span>
-        <span class="lily-pad">🪷</span>
-        <span class="lily-pad">🍃</span>
-        <span class="lily-pad">🪷</span>
-        <span class="lily-pad">🍃</span>
-        <span class="lily-pad">🪷</span>
-        <span class="lily-pad">🍃</span>
-        <span class="lily-pad">🪷</span>
-        <span class="lily-pad">🍃</span>
-        <span class="lily-pad">🪷</span>
-      </div>
+        <div class="lily-pad-border bottom-border">
+            <span class="lily-pad">🪷</span>
+            <span class="lily-pad">🍃</span>
+            <span class="lily-pad">🪷</span>
+            <span class="lily-pad">🍃</span>
+            <span class="lily-pad">🪷</span>
+            <span class="lily-pad">🍃</span>
+            <span class="lily-pad">🪷</span>
+            <span class="lily-pad">🍃</span>
+            <span class="lily-pad">🪷</span>
+            <span class="lily-pad">🍃</span>
+            <span class="lily-pad">🪷</span>
+        </div>
     </section>
 </body>
 
@@ -251,171 +397,443 @@
 
 <style>
     /* General Body Styling */
-body {
-    background-color: forestgreen;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding-top: 100px; /* To avoid content being hidden under the fixed header */
-}
+    body {
+        background-color: forestgreen;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding-top: 100px;
+        /* To avoid content being hidden under the fixed header */
+    }
 
-/* Header Styling */
-.header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background-color: #4CAF50; /* Change background to a frog-friendly green */
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    opacity: 0.9;
-}
-
-.header .logo {
-    display: flex;
-    align-items: center;
-}
-
-.header #header-img {
-    width: 40px; /* Icon size */
-    height: auto;
-    margin-right: 10px;
-}
-
-.header h1 {
-    color: white;
-    font-size: 24px;
-    margin: 0;
-}
-
-nav {
-    flex-grow: 1;
-    text-align: right;
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: flex-end;
-}
-
-nav li {
-    margin: 0 15px;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 10px 15px;
-    transition: background-color 0.3s;
-}
-
-nav a:hover {
-    background-color: #3e8e41;
-    border-radius: 5px;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
+    /* Header Styling */
     .header {
-        flex-direction: column;
-        padding: 20px 10px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: #4CAF50;
+        /* Change background to a frog-friendly green */
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        opacity: 0.9;
     }
 
     .header .logo {
-        flex-direction: column;
+        display: flex;
         align-items: center;
-        margin-bottom: 10px;
+    }
+
+    .header #header-img {
+        width: 40px;
+        /* Icon size */
+        height: auto;
+        margin-right: 10px;
+    }
+
+    .header h1 {
+        color: white;
+        font-size: 24px;
+        margin: 0;
+    }
+
+    nav {
+        flex-grow: 1;
+        text-align: right;
     }
 
     nav ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    nav li {
+        margin: 0 15px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px 15px;
+        transition: background-color 0.3s;
+    }
+
+    nav a:hover {
+        background-color: #3e8e41;
+        border-radius: 5px;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .header {
+            flex-direction: column;
+            padding: 20px 10px;
+        }
+
+        .header .logo {
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        nav ul {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav li {
+            margin: 10px 0;
+        }
+    }
+
+    /* Content Styling */
+    h2,
+    h3 {
+        color: white;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    p,
+    ul {
+        color: white;
+        font-size: 16px;
+        text-align: center;
+        list-style-position: inside;
+    }
+
+    ul ul {
+        padding-left: 20px;
+    }
+
+    /* Center image, links div, and iframe */
+    #screaming-frog {
+        display: block;
+        margin: 0 auto;
+    }
+
+    body>div,
+    #frogstorylayover {
+        text-align: center;
+    }
+
+    #frogstorylayover iframe {
+        display: block;
+        margin: 0 auto;
+    }
+
+    section {
+        text-align: center;
+    }
+
+    /* Footer Styling */
+    footer {
+        padding: 20px;
+        background-color: #4CAF50;
+        text-align: center;
+        color: white;
+        margin-top: 40px;
+    }
+
+    footer form {
+        display: flex;
         flex-direction: column;
         align-items: center;
     }
 
-    nav li {
+    footer input[type="text"],
+    footer input[type="email"] {
+        padding: 10px;
         margin: 10px 0;
+        width: 300px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
     }
-}
 
-/* Content Styling */
-h2, h3 {
-    color: white;
-    margin-bottom: 10px;
-    text-align: center;
-}
+    footer .submit {
+        background-color: #3e8e41;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-p, ul {
-    color: white;
-    font-size: 16px;
-    text-align: center;
-    list-style-position: inside;
-}
+    footer .submit:hover {
+        background-color: #2c6e2f;
+    }
 
-ul ul {
-    padding-left: 20px;
-}
+    /* ══════════ ALIEN FROG SLIDESHOW STYLES ══════════ */
+    #alien-frog-slideshow {
+        position: relative;
+        max-width: 640px;
+        margin: 0 auto 40px;
+        background: linear-gradient(135deg, #060d1a 0%, #0d1f0d 50%, #0a0a1a 100%);
+        border-radius: 20px;
+        border: 2px solid rgba(120, 255, 180, 0.25);
+        box-shadow:
+            0 0 0 1px rgba(80, 255, 120, 0.12),
+            0 0 40px rgba(0, 255, 100, 0.15),
+            0 20px 60px rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+        padding-bottom: 18px;
+    }
 
-/* Center image, links div, and iframe */
-#screaming-frog {
-    display: block;
-    margin: 0 auto;
-}
+    /* Individual slides — hidden by default */
+    .afs-slide {
+        display: none;
+        animation: afs-fadeIn 0.6s ease;
+    }
 
-body > div, #frogstorylayover {
-    text-align: center;
-}
+    .afs-slide.active {
+        display: block;
+    }
 
-#frogstorylayover iframe {
-    display: block;
-    margin: 0 auto;
-}
+    @keyframes afs-fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.97);
+        }
 
-section {
-    text-align: center;
-}
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
 
-/* Footer Styling */
-footer {
-    padding: 20px;
-    background-color: #4CAF50;
-    text-align: center;
-    color: white;
-    margin-top: 40px;
-}
+    /* Image wrapper */
+    .afs-img-wrap {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
 
-footer form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    .afs-fake-img {
+        width: 100%;
+        height: auto;
+        max-height: 60vh;
+        /* keeps image within screen height */
+        object-fit: contain;
+        display: block;
+        filter: saturate(1.3) brightness(0.9);
+        transition: transform 0.4s ease;
+    }
 
-footer input[type="text"], footer input[type="email"] {
-    padding: 10px;
-    margin: 10px 0;
-    width: 300px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
 
-footer .submit {
-    background-color: #3e8e41;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
-footer .submit:hover {
-    background-color: #2c6e2f;
-}
+    #alien-frog-slideshow:hover .afs-fake-img {
+        transform: scale(1.03);
+    }
 
+    /* Floating emoji eyes & antenna on the image */
+    .afs-alien-overlay {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding-bottom: 18px;
+    }
+
+    .afs-eye {
+        font-size: 32px;
+        position: absolute;
+        filter: drop-shadow(0 0 8px rgba(0, 255, 150, 0.9));
+        animation: afs-blink 4s ease-in-out infinite;
+    }
+
+    .afs-eye.left-eye {
+        left: 28%;
+        top: 38%;
+    }
+
+    .afs-eye.right-eye {
+        right: 28%;
+        top: 38%;
+    }
+
+    .afs-antenna {
+        font-size: 36px;
+        position: absolute;
+        top: 6%;
+        left: 50%;
+        transform: translateX(-50%);
+        filter: drop-shadow(0 0 10px rgba(180, 100, 255, 0.9));
+        animation: afs-antenna-bob 2.5s ease-in-out infinite;
+    }
+
+    @keyframes afs-blink {
+
+        0%,
+        90%,
+        100% {
+            transform: scaleY(1);
+        }
+
+        95% {
+            transform: scaleY(0.15);
+        }
+    }
+
+    @keyframes afs-antenna-bob {
+
+        0%,
+        100% {
+            transform: translateX(-50%) rotate(-5deg);
+        }
+
+        50% {
+            transform: translateX(-50%) rotate(5deg);
+        }
+    }
+
+    /* CRT scanline overlay */
+    .afs-scanline {
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(to bottom,
+                transparent 0px,
+                transparent 3px,
+                rgba(0, 0, 0, 0.08) 3px,
+                rgba(0, 0, 0, 0.08) 4px);
+        pointer-events: none;
+    }
+
+    /* Caption area */
+    .afs-caption {
+        padding: 18px 24px 8px;
+        text-align: center;
+    }
+
+    .afs-name {
+        font-size: 1.6rem;
+        font-weight: 900;
+        margin: 0 0 6px;
+        letter-spacing: 1px;
+        background: linear-gradient(90deg, #a8ff78, #78ffd6, #d4a8ff, #a8ff78);
+        background-size: 300% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: afs-shimmer 4s linear infinite;
+    }
+
+    @keyframes afs-shimmer {
+        0% {
+            background-position: 0% center;
+        }
+
+        100% {
+            background-position: 300% center;
+        }
+    }
+
+    .afs-species {
+        font-size: 0.78rem;
+        color: #7ecda8 !important;
+        margin: 0 0 10px !important;
+        letter-spacing: 0.5px;
+        text-align: center !important;
+        font-style: italic;
+    }
+
+    .afs-desc {
+        font-size: 0.95rem;
+        color: #d4f5e3 !important;
+        line-height: 1.6;
+        margin: 0 0 12px !important;
+        text-align: center !important;
+    }
+
+    .afs-badge {
+        display: inline-block;
+        background: rgba(0, 255, 120, 0.1);
+        border: 1px solid rgba(0, 255, 120, 0.35);
+        border-radius: 20px;
+        padding: 4px 14px;
+        font-size: 0.78rem;
+        color: #a8ffcc;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+    }
+
+    /* Prev / Next buttons */
+    .afs-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin: 12px 0 6px;
+    }
+
+    .afs-btn {
+        background: rgba(0, 255, 120, 0.12);
+        border: 1px solid rgba(0, 255, 120, 0.4);
+        color: #a8ffcc;
+        font-size: 1.3rem;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.15s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .afs-btn:hover {
+        background: rgba(0, 255, 120, 0.28);
+        transform: scale(1.12);
+    }
+
+    /* Dot indicators */
+    .afs-dots {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .afs-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: rgba(168, 255, 180, 0.25);
+        border: 1px solid rgba(168, 255, 180, 0.5);
+        cursor: pointer;
+        transition: background 0.25s, transform 0.2s;
+    }
+
+    .afs-dot.active-dot {
+        background: #78ffd6;
+        transform: scale(1.35);
+        box-shadow: 0 0 8px rgba(120, 255, 214, 0.8);
+    }
+
+    /* Auto-play progress bar */
+    .afs-progress-bar {
+        height: 3px;
+        background: rgba(255, 255, 255, 0.08);
+        margin: 6px 20px 0;
+        border-radius: 2px;
+        overflow: hidden;
+    }
+
+    .afs-progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #78ffd6, #a8ff78);
+        border-radius: 2px;
+        transition: width 0.1s linear;
+    }
+
+    /* ══════════ END ALIEN FROG SLIDESHOW STYLES ══════════ */
 </style>
 
 <script>
@@ -501,7 +919,7 @@ footer .submit:hover {
 
     function resetTimer() {
         clearInterval(timerInterval);
-        
+
         isRunning = false;
         isPaused = false;
 
@@ -529,7 +947,7 @@ footer .submit:hover {
         if (!isPaused && remainingSeconds > 0) {
             remainingSeconds--;
             updateDisplay();
-            
+
             if (remainingSeconds === 0) {
                 timerComplete();
             }
@@ -574,54 +992,137 @@ footer .submit:hover {
 </script>
 
 <script>
-// Center map roughly on the U.S. (adjust if you want)
-const map = L.map('frogMap').setView([39.5, -98.35], 4);
+    // Center map roughly on the U.S. (adjust if you want)
+    const map = L.map('frogMap').setView([39.5, -98.35], 4);
 
-// Tile layer (OpenStreetMap)
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19,
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
+    // Tile layer (OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
 
-// Custom frog icon – using a reliable hosted cartoon frog PNG via Twemoji
-const frogIcon = L.divIcon({
-  html: '<div style="font-size:36px;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5));">🐸</div>',
-  iconSize: [40, 40],
-  iconAnchor: [20, 36],
-  popupAnchor: [0, -38],
-  className: ''
-});
+    // Custom frog icon – using a reliable hosted cartoon frog PNG via Twemoji
+    const frogIcon = L.divIcon({
+        html: '<div style="font-size:36px;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5));">🐸</div>',
+        iconSize: [40, 40],
+        iconAnchor: [20, 36],
+        popupAnchor: [0, -38],
+        className: ''
+    });
 
-// Frog‑themed locations
-const frogPlaces = [
-  {
-    name: "Frog Fountain – TCU",
-    desc: "A famous frog landmark at Texas Christian University.",
-    coords: [32.7093, -97.3615]
-  },
-  {
-    name: "Frog Pond – Boston Common",
-    desc: "A historic pond and skating area with frog sculptures.",
-    coords: [42.3550, -71.0656]
-  },
-  {
-    name: "Frog Rock – CT",
-    desc: "A quirky roadside attraction shaped like a giant frog.",
-    coords: [41.8400, -72.3000]
-  },
-  {
-    name: "Frog Bay Tribal National Park – WI",
-    desc: "The first tribal national park in the U.S., named for its frog‑rich wetlands.",
-    coords: [46.7833, -90.7833]
-  }
-];
+    // Frog‑themed locations
+    const frogPlaces = [
+        {
+            name: "Frog Fountain – TCU",
+            desc: "A famous frog landmark at Texas Christian University.",
+            coords: [32.7093, -97.3615]
+        },
+        {
+            name: "Frog Pond – Boston Common",
+            desc: "A historic pond and skating area with frog sculptures.",
+            coords: [42.3550, -71.0656]
+        },
+        {
+            name: "Frog Rock – CT",
+            desc: "A quirky roadside attraction shaped like a giant frog.",
+            coords: [41.8400, -72.3000]
+        },
+        {
+            name: "Frog Bay Tribal National Park – WI",
+            desc: "The first tribal national park in the U.S., named for its frog‑rich wetlands.",
+            coords: [46.7833, -90.7833]
+        }
+    ];
 
-// Add markers
-frogPlaces.forEach(place => {
-  L.marker(place.coords, { icon: frogIcon })
-    .addTo(map)
-    .bindPopup(`<b>${place.name}</b><br>${place.desc}`);
-});
+    // Add markers
+    frogPlaces.forEach(place => {
+        L.marker(place.coords, { icon: frogIcon })
+            .addTo(map)
+            .bindPopup(`<b>${place.name}</b><br>${place.desc}`);
+    });
+</script>
+
+<script>
+    // ══════════ ALIEN FROG SLIDESHOW JAVASCRIPT ══════════
+    (function () {
+        const SLIDE_DURATION = 5000; // ms per slide
+        const TICK_INTERVAL = 80;   // ms between progress bar updates
+
+        const slides = document.querySelectorAll('.afs-slide');
+        const dotsWrap = document.getElementById('afs-dots');
+        const progress = document.getElementById('afs-progress');
+        const total = slides.length;
+        let current = 0;
+        let elapsed = 0;
+        let ticker = null;
+        let paused = false;
+
+        // ── Build dot indicators ──
+        for (let i = 0; i < total; i++) {
+            const d = document.createElement('button');
+            d.className = 'afs-dot' + (i === 0 ? ' active-dot' : '');
+            d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+            d.addEventListener('click', () => afsGoTo(i));
+            dotsWrap.appendChild(d);
+        }
+
+        function getDots() { return dotsWrap.querySelectorAll('.afs-dot'); }
+
+        function afsShow(index) {
+            slides[current].classList.remove('active');
+            getDots()[current].classList.remove('active-dot');
+            current = (index + total) % total;
+            slides[current].classList.add('active');
+            getDots()[current].classList.add('active-dot');
+            elapsed = 0;
+            progress.style.width = '0%';
+        }
+
+        // Exposed to the prev/next buttons via onclick
+        window.afsMove = function (dir) {
+            afsShow(current + dir);
+        };
+
+        function afsGoTo(index) {
+            afsShow(index);
+        }
+
+        // ── Auto-play tick ──
+        function startTick() {
+            clearInterval(ticker);
+            ticker = setInterval(() => {
+                if (paused) return;
+                elapsed += TICK_INTERVAL;
+                const pct = Math.min((elapsed / SLIDE_DURATION) * 100, 100);
+                progress.style.width = pct + '%';
+                if (elapsed >= SLIDE_DURATION) {
+                    afsShow(current + 1);
+                }
+            }, TICK_INTERVAL);
+        }
+
+        // ── Pause on hover ──
+        const box = document.getElementById('alien-frog-slideshow');
+        box.addEventListener('mouseenter', () => { paused = true; });
+        box.addEventListener('mouseleave', () => { paused = false; });
+
+        // ── Keyboard navigation ──
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') afsMove(-1);
+            if (e.key === 'ArrowRight') afsMove(1);
+        });
+
+        // ── Touch / swipe support ──
+        let touchStartX = 0;
+        box.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+        box.addEventListener('touchend', (e) => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(dx) > 40) afsMove(dx < 0 ? 1 : -1);
+        }, { passive: true });
+
+        startTick();
+    })();
+    // ══════════ END ALIEN FROG SLIDESHOW JAVASCRIPT ══════════
 </script>
 
 </html>
